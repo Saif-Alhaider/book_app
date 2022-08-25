@@ -59,10 +59,9 @@ class Books {
     // print(_allBooks[0].isSaved);
     for (Book element in _allBooks) {
       if (element.isSaved == true) {
-        _savedBooks.addAll([element]);
+        _savedBooks.add(element);
       }
     }
-    print(_savedBooks);
     return _savedBooks;
   }
 

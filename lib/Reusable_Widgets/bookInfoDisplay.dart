@@ -21,7 +21,6 @@ class BookInfoDisplay extends StatefulWidget {
 }
 
 class _BookInfoDisplayState extends State<BookInfoDisplay> {
-  Rx<bool> flag = Rx<bool>(false);
 
   @override
   Widget build(BuildContext context) {
@@ -67,13 +66,13 @@ class _BookInfoDisplayState extends State<BookInfoDisplay> {
                     ),
                     SizedBox(height: 5),
                     CustomTitle(
-                      title: "\$${Books().allBooks[widget.index].price}",
+                      title: "\$${widget.bookShelf[widget.index].price}",
                       size: 20,
                     ),
                     SizedBox(height: 10),
                     StarRating(
                       rate:
-                          Rx<int>(Books().allBooks[widget.index].rate.toInt()),
+                          Rx<int>(widget.bookShelf[widget.index].rate.toInt()),
                       functional: false,
                     )
                   ],
@@ -87,7 +86,6 @@ class _BookInfoDisplayState extends State<BookInfoDisplay> {
               children: [
                 GestureDetector(
                     onTap: () {
-                      flag.value = !flag.value;
                       // print(Books().allBooks[index].isSaved);
                       setState(() {
                         widget.bookShelf[widget.index].isSaved =

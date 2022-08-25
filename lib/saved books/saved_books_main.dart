@@ -29,7 +29,7 @@ class _BooksPageState extends State<SavedBooksMain> {
             physics: BouncingScrollPhysics(),
             itemCount: Books().savedBooks.length,
             itemBuilder: (context, index) {
-              if (index == Books().allBooks.length - 1) {
+              if (index == Books().savedBooks.length - 1) {
                 return Column(
                   children: [
                     BookInfoDisplay(index: index,bookShelf: Books().savedBooks),
@@ -40,7 +40,7 @@ class _BooksPageState extends State<SavedBooksMain> {
                 );
               }
               for (var element in Books().savedBooks) {
-                print(element.isSaved);
+                // print(element.price);
               }
               return BookInfoDisplay(index: index,bookShelf: Books().savedBooks);
             },

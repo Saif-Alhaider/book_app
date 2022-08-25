@@ -20,7 +20,7 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     Rx<int> index = Rx<int>(0);
     return Scaffold(
-      backgroundColor: Color.fromRGBO(253, 253, 253, 1),
+      backgroundColor: Color(0xFFFDFDFD),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
