@@ -1,8 +1,8 @@
 import 'package:book_app/BookPage/image_container.dart';
 import 'package:flutter/material.dart';
 
+import '../Models/books_model.dart';
 import '../Reusable_Widgets/MainButton.dart';
-import '../Reusable_Widgets/star_rating.dart';
 import '../Reusable_Widgets/subButton.dart';
 import '../Reusable_Widgets/title.dart';
 import 'title_and_rate.dart';
@@ -17,6 +17,7 @@ class BookPage extends StatefulWidget {
 class _BookPageState extends State<BookPage> {
   @override
   Widget build(BuildContext context) {
+    dynamic bookInfo = ModalRoute.of(context)?.settings.arguments;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -27,15 +28,26 @@ class _BookPageState extends State<BookPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ImageContainer(imageLink: "https://api.lorem.space/image/book?w=150&h=224"),
-                TitleAndRate(),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: Icon(Icons.arrow_back)),
+                ),
+                ImageContainer(imageLink: bookInfo['imageLink']),
+                TitleAndRate(
+                    title: bookInfo['title'],
+                    author: bookInfo['author'],
+                    rate: bookInfo['rate'].toInt()),
                 Column(
                   children: [
-                    const Text(
-                      "Velit minim irure voluptate ullamco pariatur id veniam qui magna id ea. In sunt ullamco velit pariatur nulla eu laborum et quis aliquip ut. Adipisicing labore reprehenderit eu Lorem proident.",
+                    Text(
+                      bookInfo['description'],
                       style: TextStyle(color: Colors.grey),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -47,7 +59,9 @@ class _BookPageState extends State<BookPage> {
                             icon: Icons.bar_chart_rounded,
                           ),
                         ),
-                        SizedBox(width: 10,),
+                        SizedBox(
+                          width: 10,
+                        ),
                         Expanded(
                           child: SubButton(
                             buttonFunction: () => null,
@@ -61,8 +75,18 @@ class _BookPageState extends State<BookPage> {
                   ],
                 ),
                 MainButton(
-                  buttonFunction: () => null,
-                  buttonTitle: "Buy Now For 49.68\$",
+                  buttonFunction: (){
+                    setState(() {
+                      bookInfo['isCart'] = !bookInfo['isCart'];
+                    });
+                    // print(bookInfo['isCart']);
+                    for (var element in Books().allBooks) {
+                      if (element.title == bookInfo['title']) {
+                        element.isCart = bookInfo['isCart'];
+                      }
+                    }
+                  },
+                  buttonTitle: bookInfo['isCart'] ?"Remove from Cart":"Buy Now For \$${bookInfo['price']}",
                 )
               ],
             ),

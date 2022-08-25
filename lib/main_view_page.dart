@@ -36,7 +36,7 @@ class _MainViewState extends State<MainView> {
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(22),
                       child: Obx(() {
                         return BottomNavigationBar(
                           currentIndex: index.value,
@@ -49,11 +49,14 @@ class _MainViewState extends State<MainView> {
                           backgroundColor: Colors.white,
                           showSelectedLabels: false,
                           showUnselectedLabels: false,
-                          items: const [
+                          items:  [
                             BottomNavigationBarItem(
-                              icon: Icon(
-                                Icons.home_outlined,
-                                size: 30,
+                              icon: Container(
+                                padding: EdgeInsets.symmetric(vertical: 10),
+                                child: Icon(
+                                  Icons.home_outlined,
+                                  size: 30,
+                                ),
                               ),
                               label: "Home",
                             ),

@@ -5,13 +5,18 @@ class SearchButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      padding: EdgeInsets.zero,
-      onPressed: () => null,
-      icon: Icon(
-        Icons.search,
-        size: 40,
-      ),
+    return Row(
+      children: [
+        
+        IconButton(
+          padding: EdgeInsets.zero,
+          onPressed: () => null,
+          icon: Icon(
+            Icons.more_vert_rounded,
+            size: 30,
+          ),
+        ),
+      ],
     );
   }
 }

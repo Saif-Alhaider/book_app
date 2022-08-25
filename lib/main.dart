@@ -13,8 +13,11 @@ class MyApp extends StatelessWidget {
     
     return MaterialApp(
       title: 'Material App',
-      home: MainView(),
-      // home: BookPage(),
+      initialRoute: "/",
+      routes: {
+        "/":(context) => MainView(),
+        "/book": (context) => BookPage()
+      },
     );
   }
 }

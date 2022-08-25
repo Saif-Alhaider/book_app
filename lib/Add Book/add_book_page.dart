@@ -16,6 +16,7 @@ class AddBookPage extends StatelessWidget {
     Rx<String> description = Rx<String>("");
     Rx<double> price = Rx<double>(0.0);
     Rx<int> rate = Rx<int>(0);
+    Rx<String> imageLink = Rx<String>("") ;
     TextEditingController titleTextfields = TextEditingController();
     TextEditingController authorTextfields = TextEditingController();
     TextEditingController imageLinkTextfields = TextEditingController();
@@ -23,13 +24,13 @@ class AddBookPage extends StatelessWidget {
     TextEditingController rateTextfields = TextEditingController();
     TextEditingController descriptionTextfields = TextEditingController();
 
-    String imageLink = "https://api.lorem.space/image/book?w=150&h=224";
+    // String imageLink = "https://api.lorem.space/image/book?w=150&h=224";
     addButton() {
       Books.addToAllBooks(
         Book(
             title: title.value,
             author: author.value,
-            imageLink: imageLink,
+            imageLink: imageLink.value,
             price: price.value,
             rate: rate.value.toDouble(),
             description: description.value),
@@ -60,9 +61,9 @@ class AddBookPage extends StatelessWidget {
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20),
-            CustomTitle(title: "Add Book"),
-            SizedBox(height: 60),
+            const SizedBox(height: 20),
+            const CustomTitle(title: "Add Book"),
+            const SizedBox(height: 40),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Padding(
@@ -85,7 +86,7 @@ class AddBookPage extends StatelessWidget {
                     CustomTextField(
                         hintText: "Image Link",
                         maxLines: 1,
-                        obj: description,
+                        obj: imageLink,
                         textEditingController: imageLinkTextfields),
                     CustomTextField(
                         hintText: "Description",
@@ -105,7 +106,7 @@ class AddBookPage extends StatelessWidget {
                 ),
               ),
             ),
-            Spacer()
+            const Spacer()
           ],
         ),
       ),

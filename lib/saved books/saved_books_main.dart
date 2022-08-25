@@ -21,7 +21,7 @@ class _BooksPageState extends State<SavedBooksMain> {
         children: [
           const SizedBox(height: 30),
           const CustomTitle(
-            title: "Books",
+            title: "Saved",
           ),
           const SizedBox(height: 20),
           Expanded(

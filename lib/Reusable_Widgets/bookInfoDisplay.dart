@@ -42,7 +42,7 @@ class _BookInfoDisplayState extends State<BookInfoDisplay> {
           SizedBox(
             width: 100,
             child:
-                Image.network("https://api.lorem.space/image/book?w=150&h=221"),
+                Image.network(widget.bookShelf[widget.index].imageLink),
           ),
           // SizedBox(width: 30),
           Expanded(
@@ -61,7 +61,7 @@ class _BookInfoDisplayState extends State<BookInfoDisplay> {
                     ),
                     SizedBox(height: 3),
                     Text(
-                      Books().allBooks[widget.index].author,
+                      widget.bookShelf[widget.index].author,
                       style: TextStyle(
                           color: Color.fromARGB(127, 6, 7, 13), fontSize: 18),
                     ),

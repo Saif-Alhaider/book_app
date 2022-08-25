@@ -8,8 +8,8 @@ class ProfilePicName extends StatelessWidget {
     return Row(
       children: [
         Container(
-          height: 60,
-          width: 60,
+          height: 50,
+          width: 50,
           decoration: BoxDecoration(
               color: Colors.blue,
               borderRadius: BorderRadius.circular(10),
@@ -20,7 +20,7 @@ class ProfilePicName extends StatelessWidget {
         const SizedBox(
           width: 10,
         ),
-        const Text("Hello Maria",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)
+        const Text("Hello User",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)
       ],
     );
   }

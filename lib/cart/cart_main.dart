@@ -21,25 +21,28 @@ class _BooksPageState extends State<Cart> {
         children: [
           const SizedBox(height: 30),
           const CustomTitle(
-            title: "Books",
+            title: "Cart",
           ),
           const SizedBox(height: 20),
           Expanded(
               child: ListView.builder(
             physics: BouncingScrollPhysics(),
-            itemCount: Books().allBooks.length,
+            itemCount: Books().cartBooks.length,
             itemBuilder: (context, index) {
               if (index == Books().allBooks.length - 1) {
                 return Column(
                   children: [
-                    BookInfoDisplay(index: index,bookShelf: Books().allBooks),
+                    BookInfoDisplay(index: index,bookShelf: Books().cartBooks),
                     SizedBox(
                       height: 100,
                     ),
                   ],
                 );
               }
-              return BookInfoDisplay(index: index,bookShelf: Books().allBooks,);
+              for (var element in Books().cartBooks) {
+                print(element.isCart);
+              }
+              return BookInfoDisplay(index: index,bookShelf: Books().cartBooks);
             },
           ))
         ],
