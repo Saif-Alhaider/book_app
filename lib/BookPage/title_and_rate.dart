@@ -16,24 +16,22 @@ class TitleAndRate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CustomTitle(
-                        textAlign: TextAlign.center,
-                        title: title,
-                      ),
-                      SizedBox(height: 5,),
-                      Text(
-                        textAlign:TextAlign.left,
-                        author,
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      SizedBox(height: 5,),
-                      Container(width: 180,child: StarRating(rate: Rx<int>(rate)),)
-                    ],
-                  ),
-    );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CustomTitle(
+                      textAlign: TextAlign.center,
+                      title: title,
+                    ),
+                    const SizedBox(height: 5,),
+                    Text(
+                      textAlign:TextAlign.left,
+                      author,
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    const SizedBox(height: 5,),
+                    SizedBox(width: 180,child: StarRating(rate: Rx<int>(rate)),)
+                  ],
+                );
   }
 }

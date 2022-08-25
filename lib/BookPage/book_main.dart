@@ -7,14 +7,7 @@ import '../Reusable_Widgets/subButton.dart';
 import '../Reusable_Widgets/title.dart';
 import 'title_and_rate.dart';
 
-class BookPage extends StatefulWidget {
-  const BookPage({Key? key}) : super(key: key);
-
-  @override
-  State<BookPage> createState() => _BookPageState();
-}
-
-class _BookPageState extends State<BookPage> {
+class BookPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     dynamic bookInfo = ModalRoute.of(context)?.settings.arguments;
@@ -74,20 +67,24 @@ class _BookPageState extends State<BookPage> {
                     ),
                   ],
                 ),
-                MainButton(
-                  buttonFunction: (){
-                    setState(() {
-                      bookInfo['isCart'] = !bookInfo['isCart'];
-                    });
-                    // print(bookInfo['isCart']);
-                    for (var element in Books().allBooks) {
-                      if (element.title == bookInfo['title']) {
-                        element.isCart = bookInfo['isCart'];
-                      }
-                    }
+                StatefulBuilder(
+                  builder: (BuildContext context, setState) {
+                    return MainButton(
+                      buttonFunction: () {
+                        setState(() => bookInfo['isCart'] = !bookInfo['isCart']);
+
+                        for (var element in Books().allBooks) {
+                          if (element.title == bookInfo['title']) {
+                            element.isCart = bookInfo['isCart'];
+                          }
+                        }
+                      },
+                      buttonTitle: bookInfo['isCart']
+                          ? "Remove from Cart"
+                          : "Buy Now For \$${bookInfo['price']}",
+                    );
                   },
-                  buttonTitle: bookInfo['isCart'] ?"Remove from Cart":"Buy Now For \$${bookInfo['price']}",
-                )
+                ),
               ],
             ),
           ),

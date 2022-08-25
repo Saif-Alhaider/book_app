@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../Reusable_Widgets/bookInfoDisplay.dart';
 
 class SavedBooksMain extends StatefulWidget {
-  SavedBooksMain({Key? key}) : super(key: key);
+  const SavedBooksMain({Key? key}) : super(key: key);
 
   @override
   State<SavedBooksMain> createState() => _BooksPageState();
@@ -33,14 +33,11 @@ class _BooksPageState extends State<SavedBooksMain> {
                 return Column(
                   children: [
                     BookInfoDisplay(index: index,bookShelf: Books().savedBooks),
-                    SizedBox(
+                    const SizedBox(
                       height: 100,
                     ),
                   ],
                 );
-              }
-              for (var element in Books().savedBooks) {
-                // print(element.price);
               }
               return BookInfoDisplay(index: index,bookShelf: Books().savedBooks);
             },

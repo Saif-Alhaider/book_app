@@ -18,6 +18,14 @@ class SubButton extends StatelessWidget {
     return SizedBox(
       height: height,
       child: ElevatedButton(
+        onPressed: buttonFunction,
+        style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -31,14 +39,6 @@ class SubButton extends StatelessWidget {
             )
           ],
         ),
-        style: ButtonStyle(
-            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ))),
-        onPressed: buttonFunction,
       ),
     );
   }

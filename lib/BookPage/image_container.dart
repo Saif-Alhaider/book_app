@@ -9,7 +9,7 @@ class ImageContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 210,
       height: 310,
       child: Image.network(

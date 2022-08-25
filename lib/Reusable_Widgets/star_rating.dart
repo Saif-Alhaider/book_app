@@ -62,7 +62,7 @@ class _StarRatingState extends State<StarRating> {
               ),
               onTap: () => widget.functional == true?rate(5):null,
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Text("${widget.rate.value.toDouble()}/5.0")

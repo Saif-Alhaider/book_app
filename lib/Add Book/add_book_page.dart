@@ -1,11 +1,14 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
+import 'package:get/get.dart';
+
 import 'package:book_app/Models/books_model.dart';
 import 'package:book_app/Reusable_Widgets/star_rating.dart';
 import 'package:book_app/Reusable_Widgets/title.dart';
-import 'package:flutter/material.dart';
 
 import '../Reusable_Widgets/MainButton.dart';
 import '../Reusable_Widgets/customTextField.dart';
-import 'package:get/get.dart';
 
 class AddBookPage extends StatelessWidget {
   const AddBookPage({Key? key}) : super(key: key);
@@ -44,13 +47,11 @@ class AddBookPage extends StatelessWidget {
       descriptionTextfields.clear();
       rate.value = 0;
       Book lastBook = Books().allBooks[Books().allBooks.length - 1];
-      print(
+      if (kDebugMode) {
+        print(
           "title:${lastBook.title}\nauthor:${lastBook.author}\ndescription:${lastBook.description}\nprice:\$${lastBook.price}\nrate:${lastBook.rate}");
-      // for (var element in Books().allBooks) {
-      //   print(
-      //       "title:${element.title}\nauthor:${element.author}\ndescription:${element.description}\nprice:${price.value}\nrate:${rate.value}");
-      //   print("-" * 20);
-      // }
+      }
+
     }
 
     return SingleChildScrollView(

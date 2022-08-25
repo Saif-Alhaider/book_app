@@ -6,7 +6,7 @@ import 'package:book_app/Reusable_Widgets/star_rating.dart';
 import '../Models/books_model.dart';
 import 'title.dart';
 
-class BookInfoDisplay extends StatefulWidget {
+class BookInfoDisplay extends StatelessWidget {
   final int index;
   final List<Book> bookShelf;
 
@@ -15,13 +15,6 @@ class BookInfoDisplay extends StatefulWidget {
     required this.index,
     required this.bookShelf,
   }) : super(key: key);
-
-  @override
-  State<BookInfoDisplay> createState() => _BookInfoDisplayState();
-}
-
-class _BookInfoDisplayState extends State<BookInfoDisplay> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,8 +33,7 @@ class _BookInfoDisplayState extends State<BookInfoDisplay> {
         children: [
           SizedBox(
             width: 100,
-            child:
-                Image.network(widget.bookShelf[widget.index].imageLink),
+            child: Image.network(bookShelf[index].imageLink),
           ),
           // SizedBox(width: 30),
           Expanded(
@@ -55,24 +47,23 @@ class _BookInfoDisplayState extends State<BookInfoDisplay> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomTitle(
-                      title: widget.bookShelf[widget.index].title,
+                      title: bookShelf[index].title,
                       size: 18,
                     ),
                     SizedBox(height: 3),
                     Text(
-                      widget.bookShelf[widget.index].author,
+                      bookShelf[index].author,
                       style: TextStyle(
                           color: Color.fromARGB(127, 6, 7, 13), fontSize: 18),
                     ),
                     SizedBox(height: 5),
                     CustomTitle(
-                      title: "\$${widget.bookShelf[widget.index].price}",
+                      title: "\$${bookShelf[index].price}",
                       size: 20,
                     ),
                     SizedBox(height: 10),
                     StarRating(
-                      rate:
-                          Rx<int>(widget.bookShelf[widget.index].rate.toInt()),
+                      rate: Rx<int>(bookShelf[index].rate.toInt()),
                       functional: false,
                     )
                   ],
@@ -84,18 +75,21 @@ class _BookInfoDisplayState extends State<BookInfoDisplay> {
             padding: const EdgeInsets.only(top: 8),
             child: Column(
               children: [
-                GestureDetector(
-                    onTap: () {
-                      // print(Books().allBooks[index].isSaved);
-                      setState(() {
-                        widget.bookShelf[widget.index].isSaved =
-                          !widget.bookShelf[widget.index].isSaved;
-                      });
-                      // print(Books().allBooks[index].isSaved);
-                    },
-                    child: widget.bookShelf[widget.index].isSaved
-                        ? Icon(Icons.bookmark_added_sharp, color: Colors.green)
-                        : Icon(Icons.bookmark_add_sharp)),
+                StatefulBuilder(
+                  builder: (BuildContext context, setState) {
+                    return GestureDetector(
+                        onTap: () {
+                          setState(
+                            () => bookShelf[index].isSaved =
+                                !bookShelf[index].isSaved,
+                          );
+                        },
+                        child: bookShelf[index].isSaved
+                            ? Icon(Icons.bookmark_added_sharp,
+                                color: Colors.green)
+                            : Icon(Icons.bookmark_add_sharp));
+                  },
+                ),
               ],
             ),
           )

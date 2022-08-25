@@ -6,7 +6,7 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final int maxLines;
   final Rx<dynamic> obj;
-  CustomTextField({
+  const CustomTextField({
     Key? key,
     required this.textEditingController,
     required this.hintText,
@@ -36,7 +36,7 @@ class CustomTextField extends StatelessWidget {
           },
           maxLines: maxLines,
           decoration: InputDecoration(
-            hintStyle: const TextStyle(fontSize: 17, color: Colors.grey),
+            hintStyle:  const TextStyle(fontSize: 17, color: Colors.grey),
             hintText: hintText,
             border: InputBorder.none,
             contentPadding: const EdgeInsets.all(20),

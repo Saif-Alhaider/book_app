@@ -20,7 +20,7 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     Rx<int> index = Rx<int>(0);
     return Scaffold(
-      backgroundColor: Color(0xFFFDFDFD),
+      backgroundColor: const Color(0xFFFDFDFD),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
@@ -52,29 +52,29 @@ class _MainViewState extends State<MainView> {
                           items:  [
                             BottomNavigationBarItem(
                               icon: Container(
-                                padding: EdgeInsets.symmetric(vertical: 10),
-                                child: Icon(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: const Icon(
                                   Icons.home_outlined,
                                   size: 30,
                                 ),
                               ),
                               label: "Home",
                             ),
-                            BottomNavigationBarItem(
+                            const BottomNavigationBarItem(
                               icon: Icon(
                                 Icons.shopping_cart_outlined,
                                 size: 30,
                               ),
                               label: "Cart",
                             ),
-                            BottomNavigationBarItem(
+                            const BottomNavigationBarItem(
                               icon: Icon(
                                 Icons.bookmark_border,
                                 size: 30,
                               ),
                               label: "Saved Books",
                             ),
-                            BottomNavigationBarItem(
+                            const BottomNavigationBarItem(
                                 icon: Icon(
                                   Icons.add,
                                   size: 30,
