@@ -1,9 +1,11 @@
+import 'package:book_app/BookPage/image_container.dart';
 import 'package:flutter/material.dart';
 
 import '../Reusable_Widgets/MainButton.dart';
 import '../Reusable_Widgets/star_rating.dart';
 import '../Reusable_Widgets/subButton.dart';
 import '../Reusable_Widgets/title.dart';
+import 'title_and_rate.dart';
 
 class BookPage extends StatefulWidget {
   const BookPage({Key? key}) : super(key: key);
@@ -25,28 +27,8 @@ class _BookPageState extends State<BookPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                  width: 210,
-                  height: 310,
-                  child: Image.network(
-                    "https://api.lorem.space/image/book?w=150&h=220",
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                Column(
-                  children: [
-                    const CustomTitle(
-                      title: "paradise",
-                    ),
-                    SizedBox(height: 5,),
-                    const Text(
-                      "this is subtext",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    SizedBox(height: 5,),
-                    StarRating(),
-                  ],
-                ),
+                ImageContainer(imageLink: "https://api.lorem.space/image/book?w=150&h=224"),
+                TitleAndRate(),
                 Column(
                   children: [
                     const Text(
@@ -57,17 +39,22 @@ class _BookPageState extends State<BookPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SubButton(
-                          buttonFunction: () => null,
-                          buttonTitle: "Preview",
-                          height: 50,
-                          width: 166.0,
+                        Expanded(
+                          child: SubButton(
+                            buttonFunction: () => null,
+                            buttonTitle: "Preview",
+                            height: 50,
+                            icon: Icons.bar_chart_rounded,
+                          ),
                         ),
-                        SubButton(
-                          buttonFunction: () => null,
-                          buttonTitle: "Preview",
-                          height: 50,
-                          width: 166.0,
+                        SizedBox(width: 10,),
+                        Expanded(
+                          child: SubButton(
+                            buttonFunction: () => null,
+                            buttonTitle: "Reviews",
+                            height: 50,
+                            icon: Icons.chat_outlined,
+                          ),
                         )
                       ],
                     ),

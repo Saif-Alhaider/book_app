@@ -5,7 +5,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController _textEditingController = TextEditingController();
   final String hintText;
   final int maxLines;
-  final Rx<String> obj;
+  final Rx<dynamic> obj;
   CustomTextField({
     Key? key,
     required this.hintText,
@@ -26,7 +26,11 @@ class CustomTextField extends StatelessWidget {
           keyboardType: TextInputType.text,
           controller: _textEditingController,
           onChanged: (textValue) {
-            obj.value = textValue;
+            // obj.value = obj.value.toString();
+            double.tryParse(textValue) == null
+                ? obj.value = textValue
+                : obj.value = double.tryParse(textValue);
+
             // print(obj);
           },
           maxLines: maxLines,

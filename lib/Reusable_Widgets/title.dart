@@ -16,7 +16,7 @@ class CustomTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
             title,
-            style: GoogleFonts.notoSerif(fontSize: size, fontWeight: fontWeight),
+            style: GoogleFonts.notoSans(fontSize: size, fontWeight: fontWeight),
           );
   }
 }
