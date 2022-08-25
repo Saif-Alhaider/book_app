@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomTextField extends StatelessWidget {
-  final TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController textEditingController;
   final String hintText;
   final int maxLines;
   final Rx<dynamic> obj;
   CustomTextField({
     Key? key,
+    required this.textEditingController,
     required this.hintText,
     this.maxLines = 1,
     required this.obj,
@@ -24,7 +25,7 @@ class CustomTextField extends StatelessWidget {
         ),
         child: TextField(
           keyboardType: TextInputType.text,
-          controller: _textEditingController,
+          controller: textEditingController,
           onChanged: (textValue) {
             // obj.value = obj.value.toString();
             double.tryParse(textValue) == null

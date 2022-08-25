@@ -33,14 +33,14 @@ class _BooksPageState extends State<BooksPage> {
               if (index == Books().allBooks.length - 1) {
                 return Column(
                   children: [
-                    BookInfoDisplay(index: index),
+                    BookInfoDisplay(index: index,bookShelf: Books().allBooks),
                     SizedBox(
                       height: 100,
                     ),
                   ],
                 );
               }
-              return BookInfoDisplay(index: index);
+              return BookInfoDisplay(index: index,bookShelf: Books().allBooks);
             },
           ))
         ],

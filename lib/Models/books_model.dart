@@ -5,7 +5,7 @@ class Book {
   final String imageLink;
   final double price;
   final double rate;
-  final bool isSaved;
+  bool isSaved;
   final bool isCart;
   Book({
     required this.title,
@@ -27,13 +27,12 @@ class Books {
       author: "saif",
       imageLink: "https://api.lorem.space/image/book?w=150&h=220",
       price: 4.9,
-      rate: 5
+      rate: 5,
     ),
     Book(
       title: "Game of Thrones",
       author: "saif",
       imageLink: "https://api.lorem.space/image/book?w=150&h=220",
-      isSaved: true,
       price: 14.9,
       rate: 3
     ),
@@ -41,7 +40,6 @@ class Books {
       title: "brothers of karmasov",
       author: "saif",
       imageLink: "https://api.lorem.space/image/book?w=150&h=220",
-      isSaved: true,
       price: 8.0,
       rate: 1
     )
@@ -64,6 +62,7 @@ get savedBooks {
         _savedBooks.addAll([element]);
       }
     }
+    print(_savedBooks);
     return _savedBooks;
   }
   get cartBooks{

@@ -16,16 +16,40 @@ class AddBookPage extends StatelessWidget {
     Rx<String> description = Rx<String>("");
     Rx<double> price = Rx<double>(0.0);
     Rx<int> rate = Rx<int>(0);
+    TextEditingController titleTextfields = TextEditingController();
+    TextEditingController authorTextfields = TextEditingController();
+    TextEditingController imageLinkTextfields = TextEditingController();
+    TextEditingController priceTextfields = TextEditingController();
+    TextEditingController rateTextfields = TextEditingController();
+    TextEditingController descriptionTextfields = TextEditingController();
+
     String imageLink = "https://api.lorem.space/image/book?w=150&h=224";
     addButton() {
       Books.addToAllBooks(
-        Book(title: title.value, author: author.value, imageLink: imageLink,price: price.value,rate: rate.value.toDouble(),description: description.value),
+        Book(
+            title: title.value,
+            author: author.value,
+            imageLink: imageLink,
+            price: price.value,
+            rate: rate.value.toDouble(),
+            description: description.value),
       );
-      for (var element in Books().allBooks) {
-        print(
-            "title:${element.title}\nauthor:${element.author}\ndescription:${element.description}\nprice:${price.value}\nrate:${rate.value}");
-        print("-" * 20);
-      }
+      // clearing all fields
+      titleTextfields.clear();
+      authorTextfields.clear();
+      imageLinkTextfields.clear();
+      priceTextfields.clear();
+      rateTextfields.clear();
+      descriptionTextfields.clear();
+      rate.value = 0;
+      Book lastBook = Books().allBooks[Books().allBooks.length - 1];
+      print(
+          "title:${lastBook.title}\nauthor:${lastBook.author}\ndescription:${lastBook.description}\nprice:\$${lastBook.price}\nrate:${lastBook.rate}");
+      // for (var element in Books().allBooks) {
+      //   print(
+      //       "title:${element.title}\nauthor:${element.author}\ndescription:${element.description}\nprice:${price.value}\nrate:${rate.value}");
+      //   print("-" * 20);
+      // }
     }
 
     return SingleChildScrollView(
@@ -45,18 +69,33 @@ class AddBookPage extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 0),
                 child: Column(
                   children: [
-                    CustomTextField(hintText: "Book's Name", obj: title),
-                    CustomTextField(hintText: "Author's Name", obj: author),
                     CustomTextField(
-                        hintText: "Price", maxLines: 1, obj: price),
+                        hintText: "Book's Name",
+                        obj: title,
+                        textEditingController: titleTextfields),
                     CustomTextField(
-                        hintText: "Image Link", maxLines: 1, obj: description),
+                        hintText: "Author's Name",
+                        obj: author,
+                        textEditingController: authorTextfields),
                     CustomTextField(
-                        hintText: "Description", maxLines: 5, obj: description),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: StarRating(rate: rate),
-                        ),
+                        hintText: "Price",
+                        maxLines: 1,
+                        obj: price,
+                        textEditingController: priceTextfields),
+                    CustomTextField(
+                        hintText: "Image Link",
+                        maxLines: 1,
+                        obj: description,
+                        textEditingController: imageLinkTextfields),
+                    CustomTextField(
+                        hintText: "Description",
+                        maxLines: 5,
+                        obj: description,
+                        textEditingController: descriptionTextfields),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: StarRating(rate: rate),
+                    ),
                     // -----------------------
                     MainButton(
                       buttonFunction: addButton,

@@ -29,8 +29,8 @@ class _MainViewState extends State<MainView> {
             height: double.maxFinite,
             child: Stack(
               children: [
-                // Obx(() => pages[index.value]),
-                pages[3],
+                Obx(() => pages[index.value]),
+                // pages[3],
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Align(
