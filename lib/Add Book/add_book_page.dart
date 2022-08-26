@@ -6,28 +6,29 @@ import 'package:get/get.dart';
 import 'package:book_app/Models/books_model.dart';
 import 'package:book_app/Reusable_Widgets/star_rating.dart';
 import 'package:book_app/Reusable_Widgets/title.dart';
-
 import '../Reusable_Widgets/MainButton.dart';
 import '../Reusable_Widgets/customTextField.dart';
 
+import './textfiled_vars.dart';
+import 'clear_textfields.dart';
+import 'validating/validating_and_error_msgs.dart';
+import 'validating/validating_textfields.dart';
+
 class AddBookPage extends StatelessWidget {
-  const AddBookPage({Key? key}) : super(key: key);
+  AddBookPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    // Rx<String> title = Rx<String>("");
-    // Rx<String> author = Rx<String>("");
-    // Rx<String> description = Rx<String>("");
-    // Rx<double> price = Rx<double>(0.0);
     Rx<int> rate = Rx<int>(0);
-    // Rx<String> imageLink = Rx<String>("");
-    TextEditingController titleTextfields = TextEditingController();
-    TextEditingController authorTextfields = TextEditingController();
-    TextEditingController imageLinkTextfields = TextEditingController();
-    TextEditingController priceTextfields = TextEditingController();
-    TextEditingController descriptionTextfields = TextEditingController();
-
+    
     // String imageLink = "https://api.lorem.space/image/book?w=150&h=224";
     addButton() {
+      print(titleTextfields.text);
+      validator();
+      // if (double.tryParse(priceTextfields.text) == null) {
+      //   priceValidator.value = true;
+      //   authorErrMsg.value = "Please Enter ";
+      // }
       Books.addToAllBooks(
         Book(
             title: titleTextfields.text,
@@ -38,13 +39,14 @@ class AddBookPage extends StatelessWidget {
             description: descriptionTextfields.text),
       );
       FocusScope.of(context).unfocus();
-      titleTextfields.clear();
-      authorTextfields.clear();
-      imageLinkTextfields.clear();
-      priceTextfields.clear();
-      descriptionTextfields.clear();
-      Book lastBook = Books().allBooks[Books().allBooks.length - 1];
+      // titleTextfields.clear();
+      // authorTextfields.clear();
+      // imageLinkTextfields.clear();
+      // priceTextfields.clear();
+      // descriptionTextfields.clear();
+      clearTextfields();
       if (kDebugMode) {
+        Book lastBook = Books().allBooks[Books().allBooks.length - 1];
         print(
             "title:${lastBook.title}\nauthor:${lastBook.author}\ndescription:${lastBook.description}\nprice:\$${lastBook.price}\nrate:${lastBook.rate}");
       }
@@ -69,20 +71,31 @@ class AddBookPage extends StatelessWidget {
                   children: [
                     CustomTextField(
                         hintText: "Book's Name",
+                        validator: titleValidator,
+                        errmsg: titleErrMsg,
                         textEditingController: titleTextfields),
                     CustomTextField(
+                        validator: authorValidator,
+                        errmsg: authorErrMsg,
                         hintText: "Author's Name",
                         textEditingController: authorTextfields),
                     CustomTextField(
                         hintText: "Price",
+                        textInputType: TextInputType.number,
+                        validator: priceValidator,
+                        errmsg: priceErrMsg,
                         maxLines: 1,
                         textEditingController: priceTextfields),
                     CustomTextField(
+                        validator: imageLinkValidator,
+                        errmsg: imageLinkErrMsg,
                         hintText: "Image Link",
                         maxLines: 1,
                         textEditingController: imageLinkTextfields),
                     CustomTextField(
                         hintText: "Description",
+                        validator: descriptionValidator,
+                        errmsg: descriptionErrMsg,
                         maxLines: 5,
                         textEditingController: descriptionTextfields),
                     Padding(

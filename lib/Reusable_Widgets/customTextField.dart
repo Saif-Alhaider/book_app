@@ -5,11 +5,17 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController textEditingController;
   final String hintText;
   final int maxLines;
+  final Rx<bool> validator;
+  final Rx<String> errmsg;
+  final TextInputType textInputType;
   const CustomTextField({
     Key? key,
     required this.textEditingController,
     required this.hintText,
     this.maxLines = 1,
+    required this.validator,
+    required this.errmsg,
+    this.textInputType = TextInputType.text,
   }) : super(key: key);
 
   @override
@@ -21,24 +27,18 @@ class CustomTextField extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: TextField(
-          keyboardType: TextInputType.text,
-          controller: textEditingController,
-          onChanged: (textValue) {
-            // double.tryParse(textValue) == null
-            //     ? obj.value = textValue
-            //     : obj.value = double.tryParse(textValue);
-
-            // print(obj);
-          },
-          maxLines: maxLines,
-          decoration: InputDecoration(
-            hintStyle:  const TextStyle(fontSize: 17, color: Colors.grey),
-            hintText: hintText,
-            border: InputBorder.none,
-            contentPadding: const EdgeInsets.all(20),
-          ),
-        ),
+        child: Obx(() => TextField(
+              keyboardType: textInputType,
+              controller: textEditingController,
+              maxLines: maxLines,
+              decoration: InputDecoration(
+                errorText: validator.value ? errmsg.value : null,
+                hintStyle: const TextStyle(fontSize: 17, color: Colors.grey),
+                hintText: hintText,
+                border: InputBorder.none,
+                contentPadding: const EdgeInsets.all(20),
+              ),
+            )),
       ),
     );
   }

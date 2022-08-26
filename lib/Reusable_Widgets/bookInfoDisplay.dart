@@ -33,7 +33,12 @@ class BookInfoDisplay extends StatelessWidget {
         children: [
           SizedBox(
             width: 100,
-            child: Image.network(bookShelf[index].imageLink),
+            // child: Image.network(bookShelf[index].imageLink),
+            child: FadeInImage(
+              placeholder: AssetImage("Assets/Images/placeholder.jpg"),
+              image: NetworkImage(bookShelf[index].imageLink),
+              
+            ),
           ),
           // SizedBox(width: 30),
           Expanded(
