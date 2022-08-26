@@ -14,44 +14,40 @@ class AddBookPage extends StatelessWidget {
   const AddBookPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    Rx<String> title = Rx<String>("");
-    Rx<String> author = Rx<String>("");
-    Rx<String> description = Rx<String>("");
-    Rx<double> price = Rx<double>(0.0);
+    // Rx<String> title = Rx<String>("");
+    // Rx<String> author = Rx<String>("");
+    // Rx<String> description = Rx<String>("");
+    // Rx<double> price = Rx<double>(0.0);
     Rx<int> rate = Rx<int>(0);
-    Rx<String> imageLink = Rx<String>("") ;
+    // Rx<String> imageLink = Rx<String>("");
     TextEditingController titleTextfields = TextEditingController();
     TextEditingController authorTextfields = TextEditingController();
     TextEditingController imageLinkTextfields = TextEditingController();
     TextEditingController priceTextfields = TextEditingController();
-    TextEditingController rateTextfields = TextEditingController();
     TextEditingController descriptionTextfields = TextEditingController();
 
     // String imageLink = "https://api.lorem.space/image/book?w=150&h=224";
     addButton() {
       Books.addToAllBooks(
         Book(
-            title: title.value,
-            author: author.value,
-            imageLink: imageLink.value,
-            price: price.value,
+            title: titleTextfields.text,
+            author: authorTextfields.text,
+            imageLink: imageLinkTextfields.text,
+            price: double.parse(priceTextfields.text),
             rate: rate.value.toDouble(),
-            description: description.value),
+            description: descriptionTextfields.text),
       );
-      // clearing all fields
+      FocusScope.of(context).unfocus();
       titleTextfields.clear();
       authorTextfields.clear();
       imageLinkTextfields.clear();
       priceTextfields.clear();
-      rateTextfields.clear();
       descriptionTextfields.clear();
-      rate.value = 0;
       Book lastBook = Books().allBooks[Books().allBooks.length - 1];
       if (kDebugMode) {
         print(
-          "title:${lastBook.title}\nauthor:${lastBook.author}\ndescription:${lastBook.description}\nprice:\$${lastBook.price}\nrate:${lastBook.rate}");
+            "title:${lastBook.title}\nauthor:${lastBook.author}\ndescription:${lastBook.description}\nprice:\$${lastBook.price}\nrate:${lastBook.rate}");
       }
-
     }
 
     return SingleChildScrollView(
@@ -73,36 +69,31 @@ class AddBookPage extends StatelessWidget {
                   children: [
                     CustomTextField(
                         hintText: "Book's Name",
-                        obj: title,
                         textEditingController: titleTextfields),
                     CustomTextField(
                         hintText: "Author's Name",
-                        obj: author,
                         textEditingController: authorTextfields),
                     CustomTextField(
                         hintText: "Price",
                         maxLines: 1,
-                        obj: price,
                         textEditingController: priceTextfields),
                     CustomTextField(
                         hintText: "Image Link",
                         maxLines: 1,
-                        obj: imageLink,
                         textEditingController: imageLinkTextfields),
                     CustomTextField(
                         hintText: "Description",
                         maxLines: 5,
-                        obj: description,
                         textEditingController: descriptionTextfields),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: StarRating(rate: rate),
-                    ),
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: StarRating(rate: rate)),
+
                     // -----------------------
                     MainButton(
                       buttonFunction: addButton,
                       buttonTitle: "Add",
-                    )
+                    ),
                   ],
                 ),
               ),

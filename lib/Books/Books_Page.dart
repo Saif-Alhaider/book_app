@@ -1,5 +1,6 @@
 import 'package:book_app/Books/AppBar/main_AppBar.dart';
 import 'package:book_app/Models/books_model.dart';
+import 'package:book_app/Models/sent_book_data.dart';
 import 'package:book_app/Reusable_Widgets/title.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class BooksPage extends StatelessWidget {
       final input = query.toLowerCase();
       return bookTitle.contains(input);
     }).toList();
-    print(suggestions);
+    print("this is the book $suggestions");
     fullBooks.value = suggestions;
   }
 
@@ -34,6 +35,7 @@ class BooksPage extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(8),
           ),
+          // this the text field section 
           child: TextField(
             onChanged: (value) => searchBook(value),
             decoration: const InputDecoration(
@@ -54,50 +56,42 @@ class BooksPage extends StatelessWidget {
         ),
         const SizedBox(height: 40),
         Expanded(
-            child: ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          // itemCount: fullBooks.length,
-          itemCount: fullBooks.value.length,
-          itemBuilder: (context, index) {
-            if (index == fullBooks.value.length - 1) {
-              return Column(
-                children: [
-                  GestureDetector(
+          child: Obx(() => ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: fullBooks.value.length,
+                itemBuilder: (context, index) {
+                  if (index == fullBooks.value.length - 1) {
+                    return Column(
+                      children: [
+                        GestureDetector(
+                            onTap: () {
+                              FocusScope.of(context).unfocus();
+                              Navigator.pushNamed(context, "/book",
+                                  arguments: sentBookData(
+                                          fullBooks: fullBooks, index: index)
+                                      .sentData);
+                            },
+                            child: Obx(() => BookInfoDisplay(
+                                index: index, bookShelf: fullBooks.value))),
+                        const SizedBox(
+                          height: 100,
+                        ),
+                      ],
+                    );
+                  }
+                  return GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, "/book", arguments: {
-                          "title": fullBooks.value[index].title,
-                          "author": fullBooks.value[index].author,
-                          "rate": fullBooks.value[index].rate,
-                          "description": fullBooks.value[index].description,
-                          "price": fullBooks.value[index].price,
-                          "imageLink": fullBooks.value[index].imageLink,
-                          "isCart": fullBooks.value[index].isCart,
-                        });
+                        FocusScope.of(context).unfocus();
+                        Navigator.pushNamed(context, "/book",
+                            arguments:
+                                sentBookData(fullBooks: fullBooks, index: index)
+                                    .sentData);
                       },
-                      child: BookInfoDisplay(
-                          index: index, bookShelf: fullBooks.value)),
-                  const SizedBox(
-                    height: 100,
-                  ),
-                ],
-              );
-            }
-            return GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, "/book", arguments: {
-                    "title": fullBooks.value[index].title,
-                    "author": fullBooks.value[index].author,
-                    "rate": fullBooks.value[index].rate,
-                    "description": fullBooks.value[index].description,
-                    "price": fullBooks.value[index].price,
-                    "imageLink": fullBooks.value[index].imageLink,
-                    "isCart": fullBooks.value[index].isCart,
-                  });
+                      child: Obx(() => BookInfoDisplay(
+                          index: index, bookShelf: fullBooks.value)));
                 },
-                child: BookInfoDisplay(
-                    index: index, bookShelf: fullBooks.value));
-          },
-        ))
+              )),
+        )
       ],
     );
   }

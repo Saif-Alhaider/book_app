@@ -3,6 +3,7 @@ class MainButton extends StatelessWidget {
   
   final Function() buttonFunction;
   final String buttonTitle;
+  
   const MainButton({
     Key? key,
     required this.buttonFunction,

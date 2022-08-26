@@ -5,13 +5,11 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController textEditingController;
   final String hintText;
   final int maxLines;
-  final Rx<dynamic> obj;
   const CustomTextField({
     Key? key,
     required this.textEditingController,
     required this.hintText,
     this.maxLines = 1,
-    required this.obj,
   }) : super(key: key);
 
   @override
@@ -27,10 +25,9 @@ class CustomTextField extends StatelessWidget {
           keyboardType: TextInputType.text,
           controller: textEditingController,
           onChanged: (textValue) {
-            // obj.value = obj.value.toString();
-            double.tryParse(textValue) == null
-                ? obj.value = textValue
-                : obj.value = double.tryParse(textValue);
+            // double.tryParse(textValue) == null
+            //     ? obj.value = textValue
+            //     : obj.value = double.tryParse(textValue);
 
             // print(obj);
           },

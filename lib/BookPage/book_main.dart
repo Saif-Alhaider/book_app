@@ -11,6 +11,7 @@ class BookPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     dynamic bookInfo = ModalRoute.of(context)?.settings.arguments;
+    print(bookInfo);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -71,7 +72,8 @@ class BookPage extends StatelessWidget {
                   builder: (BuildContext context, setState) {
                     return MainButton(
                       buttonFunction: () {
-                        setState(() => bookInfo['isCart'] = !bookInfo['isCart']);
+                        setState(
+                            () => bookInfo['isCart'] = !bookInfo['isCart']);
 
                         for (var element in Books().allBooks) {
                           if (element.title == bookInfo['title']) {

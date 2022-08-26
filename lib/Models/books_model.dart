@@ -48,10 +48,7 @@ class Books {
   List<Book> _savedBooks = [];
   List<Book> _cartBooks = [];
 
-  static void addToAllBooks(Book book) {
-    _allBooks.add(book);
-    print(_allBooks.length);
-  }
+  static void addToAllBooks(Book book) => _allBooks.add(book);
 
   List<Book> get allBooks => _allBooks;
 
