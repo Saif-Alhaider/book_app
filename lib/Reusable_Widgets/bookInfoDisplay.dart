@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,14 +32,21 @@ class BookInfoDisplay extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
+          CachedNetworkImage(
             width: 100,
-            // child: Image.network(bookShelf[index].imageLink),
-            child: FadeInImage(
-              placeholder: AssetImage("Assets/Images/placeholder.jpg"),
-              image: NetworkImage(bookShelf[index].imageLink),
-              
-            ),
+            height: 200,
+            fit: BoxFit.fill,
+            imageUrl: bookShelf[index].imageLink,
+            placeholder: (context, url) {
+              return Center(
+                child: SizedBox(
+                  width: 30,
+                  height: 30,
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            },
+            errorWidget: (context, url, error) => Image.asset("Assets/Images/placeholder.jpg",fit: BoxFit.fill,),
           ),
           // SizedBox(width: 30),
           Expanded(

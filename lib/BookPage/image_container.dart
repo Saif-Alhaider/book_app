@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ImageContainer extends StatelessWidget {
@@ -9,11 +10,22 @@ class ImageContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return CachedNetworkImage(
       width: 210,
       height: 310,
-      child: Image.network(
-        imageLink,
+      fit: BoxFit.fill,
+      imageUrl: imageLink,
+      placeholder: (context, url) {
+        return const Center(
+          child: SizedBox(
+            width: 30,
+            height: 30,
+            child: CircularProgressIndicator(),
+          ),
+        );
+      },
+      errorWidget: (context, url, error) => Image.asset(
+        "Assets/Images/placeholder.jpg",
         fit: BoxFit.fill,
       ),
     );
