@@ -35,7 +35,7 @@ class BooksPage extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(8),
           ),
-          // this the text field section 
+          // this the text field section
           child: TextField(
             onChanged: (value) => searchBook(value),
             decoration: const InputDecoration(

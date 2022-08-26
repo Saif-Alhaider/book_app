@@ -20,36 +20,28 @@ class AddBookPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Rx<int> rate = Rx<int>(0);
-    
+
     // String imageLink = "https://api.lorem.space/image/book?w=150&h=224";
     addButton() {
-      print(titleTextfields.text);
-      validator();
-      // if (double.tryParse(priceTextfields.text) == null) {
-      //   priceValidator.value = true;
-      //   authorErrMsg.value = "Please Enter ";
-      // }
-      Books.addToAllBooks(
-        Book(
-            title: titleTextfields.text,
-            author: authorTextfields.text,
-            imageLink: imageLinkTextfields.text,
-            price: double.parse(priceTextfields.text),
-            rate: rate.value.toDouble(),
-            description: descriptionTextfields.text),
-      );
-      FocusScope.of(context).unfocus();
-      // titleTextfields.clear();
-      // authorTextfields.clear();
-      // imageLinkTextfields.clear();
-      // priceTextfields.clear();
-      // descriptionTextfields.clear();
-      clearTextfields();
-      if (kDebugMode) {
-        Book lastBook = Books().allBooks[Books().allBooks.length - 1];
-        print(
-            "title:${lastBook.title}\nauthor:${lastBook.author}\ndescription:${lastBook.description}\nprice:\$${lastBook.price}\nrate:${lastBook.rate}");
-      }
+      try {
+        validator();
+        Books.addToAllBooks(
+          Book(
+              title: titleTextfields.text,
+              author: authorTextfields.text,
+              imageLink: imageLinkTextfields.text,
+              price: double.parse(priceTextfields.text),
+              rate: rate.value.toDouble(),
+              description: descriptionTextfields.text),
+        );
+        FocusScope.of(context).unfocus();
+        clearTextfields();
+        if (kDebugMode) {
+          Book lastBook = Books().allBooks[Books().allBooks.length - 1];
+          print(
+              "title:${lastBook.title}\nauthor:${lastBook.author}\ndescription:${lastBook.description}\nprice:\$${lastBook.price}\nrate:${lastBook.rate}");
+        }
+      } catch (e) {}
     }
 
     return SingleChildScrollView(
