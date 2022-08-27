@@ -30,7 +30,7 @@ class TitleAndRate extends StatelessWidget {
                       style: TextStyle(color: Colors.grey),
                     ),
                     const SizedBox(height: 5,),
-                    SizedBox(width: 180,child: StarRating(rate: Rx<int>(rate)),)
+                    SizedBox(width: 180,child: StarRating(rate: Rx<int>(rate),functional: false),)
                   ],
                 );
   }

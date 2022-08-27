@@ -8,13 +8,11 @@ import '../Models/books_model.dart';
 import 'title.dart';
 
 class BookInfoDisplay extends StatelessWidget {
-  final int index;
-  final List<Book> bookShelf;
+  final Map bookInfo;
 
   const BookInfoDisplay({
     Key? key,
-    required this.index,
-    required this.bookShelf,
+    required this.bookInfo,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -36,7 +34,8 @@ class BookInfoDisplay extends StatelessWidget {
             width: 100,
             height: 200,
             fit: BoxFit.fill,
-            imageUrl: bookShelf[index].imageLink,
+            // imageUrl: bookShelf[index].imageLink,
+            imageUrl: bookInfo['imageLink'],
             placeholder: (context, url) {
               return const Center(
                 child: SizedBox(
@@ -46,7 +45,10 @@ class BookInfoDisplay extends StatelessWidget {
                 ),
               );
             },
-            errorWidget: (context, url, error) => Image.asset("Assets/Images/placeholder.jpg",fit: BoxFit.fill,),
+            errorWidget: (context, url, error) => Image.asset(
+              "Assets/Images/placeholder.jpg",
+              fit: BoxFit.fill,
+            ),
           ),
           // SizedBox(width: 30),
           Expanded(
@@ -60,23 +62,24 @@ class BookInfoDisplay extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomTitle(
-                      title: bookShelf[index].title,
+                      title: bookInfo['title'],
                       size: 18,
                     ),
                     const SizedBox(height: 3),
                     Text(
-                      bookShelf[index].author,
+                      bookInfo['author'],
                       style: const TextStyle(
-                          color: const Color.fromARGB(127, 6, 7, 13), fontSize: 18),
+                          color: const Color.fromARGB(127, 6, 7, 13),
+                          fontSize: 18),
                     ),
                     const SizedBox(height: 5),
                     CustomTitle(
-                      title: "\$${bookShelf[index].price}",
+                      title: "\$${bookInfo['price']}",
                       size: 20,
                     ),
                     const SizedBox(height: 10),
                     StarRating(
-                      rate: Rx<int>(bookShelf[index].rate.toInt()),
+                      rate: Rx<int>(bookInfo['rate'].toInt()),
                       functional: false,
                     )
                   ],
@@ -93,13 +96,17 @@ class BookInfoDisplay extends StatelessWidget {
                     return GestureDetector(
                         onTap: () {
                           setState(
-                            () => bookShelf[index].isSaved =
-                                !bookShelf[index].isSaved,
-                                
+                            () {
+                              bookInfo['isSaved'] = !bookInfo['isSaved'];
+                              for (var element in Books().allBooks) {
+                          if (element.title == bookInfo['title']) {
+                            element.isSaved = bookInfo['isSaved'];
+                          }
+                        }
+                            },
                           );
-                          print(Books().savedBooks);
                         },
-                        child: bookShelf[index].isSaved
+                        child: bookInfo['isSaved']
                             ? const Icon(Icons.bookmark_added_sharp,
                                 color: Colors.green)
                             : const Icon(Icons.bookmark_add_sharp));

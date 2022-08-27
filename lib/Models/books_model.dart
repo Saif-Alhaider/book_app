@@ -24,7 +24,7 @@ class Books {
   static List<Book> _allBooks = [
     Book(
       title: "Yves Saint Laurent",
-      author: "saif",
+      author: "Laurence Benaïm",
       imageLink:
           "https://images-na.ssl-images-amazon.com/images/I/31zSzxEMQ8L._SX340_BO1,204,203,200_.jpg",
       price: 4.9,
@@ -32,14 +32,14 @@ class Books {
     ),
     Book(
         title: "Game of Thrones",
-        author: "saif",
+        author: "george r r martin",
         imageLink:
             "https://upload.wikimedia.org/wikipedia/en/d/dc/A_Song_of_Ice_and_Fire_book_collection_box_set_cover.jpg",
         price: 14.9,
         rate: 3),
     Book(
-        title: "brothers of karmasov",
-        author: "saif",
+        title: "brothers of karamazov",
+        author: "Fyodor Dostoevsky",
         imageLink: "https://kbimages1-a.akamaihd.net/561f9624-ba0a-43dc-a569-dac6327e3804/1200/1200/False/the-brothers-karamazov-233.jpg",
         price: 8.0,
         rate: 1)

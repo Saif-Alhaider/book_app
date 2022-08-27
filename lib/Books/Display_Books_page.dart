@@ -19,8 +19,7 @@ class DisplayBooksPage extends StatefulWidget {
     required this.appbar,
     required this.pageTitle,
     required this.fullBooks,
-  }) : 
-  super(key: key);
+  }) : super(key: key);
 
   @override
   State<DisplayBooksPage> createState() => _DisplayBooksPageState();
@@ -29,7 +28,6 @@ class DisplayBooksPage extends StatefulWidget {
 class _DisplayBooksPageState extends State<DisplayBooksPage> {
   @override
   Widget build(BuildContext context) {
-    print(widget.fullBooks.value.length);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -66,14 +64,15 @@ class _DisplayBooksPageState extends State<DisplayBooksPage> {
         ),
         const SizedBox(height: 40),
         Expanded(
-          child: ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            itemCount: widget.fullBooks.value.length,
-            itemBuilder: (context, index) {
-              if (index == widget.fullBooks.value.length - 1) {
-                return Column(
-                  children: [
-                    GestureDetector(
+          child: Obx(
+            () => ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: widget.fullBooks.value.length,
+              itemBuilder: (context, index) {
+                if (index == widget.fullBooks.value.length - 1) {
+                  return Column(
+                    children: [
+                      GestureDetector(
                         onTap: () {
                           FocusScope.of(context).unfocus();
                           Navigator.pushNamed(context, "/book",
@@ -81,25 +80,33 @@ class _DisplayBooksPageState extends State<DisplayBooksPage> {
                                       fullBooks: widget.fullBooks, index: index)
                                   .sentData);
                         },
-                        child: Obx(() => BookInfoDisplay(
-                            index: index, bookShelf: widget.fullBooks.value))),
-                    const SizedBox(
-                      height: 100,
-                    ),
-                  ],
-                );
-              }
-              return GestureDetector(
-                  onTap: () {
-                    FocusScope.of(context).unfocus();
-                    Navigator.pushNamed(context, "/book",
-                        arguments:
-                            sentBookData(fullBooks: widget.fullBooks, index: index)
-                                .sentData);
-                  },
-                  child: Obx(() => BookInfoDisplay(
-                      index: index, bookShelf: widget.fullBooks.value)));
-            },
+                        child: BookInfoDisplay(
+                          bookInfo: sentBookData(
+                                  fullBooks: widget.fullBooks, index: index)
+                              .sentData,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 100,
+                      ),
+                    ],
+                  );
+                }
+                return GestureDetector(
+                    onTap: () {
+                      FocusScope.of(context).unfocus();
+                      Navigator.pushNamed(context, "/book",
+                          arguments: sentBookData(
+                                  fullBooks: widget.fullBooks, index: index)
+                              .sentData);
+                    },
+                    child: BookInfoDisplay(
+                      bookInfo: sentBookData(
+                              fullBooks: widget.fullBooks, index: index)
+                          .sentData,
+                    ));
+              },
+            ),
           ),
         )
       ],

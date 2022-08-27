@@ -11,7 +11,8 @@ class sentBookData {
     required this.index,
   });
   Map _sentData = {};
-  get sentData => _sentData = {
+  get sentData {
+    return _sentData = {
         "title": fullBooks.value[index].title,
         "author": fullBooks.value[index].author,
         "rate": fullBooks.value[index].rate,
@@ -19,5 +20,7 @@ class sentBookData {
         "price": fullBooks.value[index].price,
         "imageLink": fullBooks.value[index].imageLink,
         "isCart": fullBooks.value[index].isCart,
+        "isSaved":fullBooks.value[index].isSaved
       };
+  }
 }

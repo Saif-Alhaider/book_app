@@ -1,4 +1,4 @@
-import 'package:book_app/Books/Books_Page.dart';
+import 'package:book_app/Books/Display_Books_page.dart';
 import 'package:flutter/material.dart';
 
 import 'Add Book/add_book_page.dart';
@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Material App',
       initialRoute: "/",
       routes: {
