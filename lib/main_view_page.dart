@@ -29,7 +29,7 @@ class _MainViewState extends State<MainView> {
             child: Stack(
               children: [
                 Obx(() {
-                  List<DisplayBooksPage> pages = [
+                  List pages = [
                     DisplayBooksPage(
                         appbar: true,
                         fullBooks: Rx<List<Book>>(Books().allBooks),
@@ -42,6 +42,7 @@ class _MainViewState extends State<MainView> {
                         appbar: false,
                         fullBooks: Rx<List<Book>>(Books().savedBooks),
                         pageTitle: "Saved Books"),
+                        AddBookPage()
                   ];
                   return pages[index.value];
                 }),
