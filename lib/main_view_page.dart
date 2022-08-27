@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import 'Add Book/add_book_page.dart';
 import 'Books/Books_Page.dart';
+import 'Models/books_model.dart';
 import 'cart/cart_main.dart';
 import 'saved books/saved_books_main.dart';
 
@@ -14,8 +15,6 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
-  List pages = [BooksPage(), Cart(), SavedBooksMain(), AddBookPage()];
-
   @override
   Widget build(BuildContext context) {
     Rx<int> index = Rx<int>(0);
@@ -29,7 +28,23 @@ class _MainViewState extends State<MainView> {
             height: double.maxFinite,
             child: Stack(
               children: [
-                Obx(() => pages[index.value]),
+                Obx(() {
+                  List<DisplayBooksPage> pages = [
+                    DisplayBooksPage(
+                        appbar: true,
+                        fullBooks: Rx<List<Book>>(Books().allBooks),
+                        pageTitle: "Book List"),
+                    DisplayBooksPage(
+                        appbar: false,
+                        fullBooks: Rx<List<Book>>(Books().cartBooks),
+                        pageTitle: "Cart"),
+                    DisplayBooksPage(
+                        appbar: false,
+                        fullBooks: Rx<List<Book>>(Books().savedBooks),
+                        pageTitle: "Saved Books"),
+                  ];
+                  return pages[index.value];
+                }),
                 // pages[3],
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -49,10 +64,11 @@ class _MainViewState extends State<MainView> {
                           backgroundColor: Colors.white,
                           showSelectedLabels: false,
                           showUnselectedLabels: false,
-                          items:  [
+                          items: [
                             BottomNavigationBarItem(
                               icon: Container(
-                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
                                 child: const Icon(
                                   Icons.home_outlined,
                                   size: 30,

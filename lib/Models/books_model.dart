@@ -52,8 +52,7 @@ class Books {
 
   List<Book> get allBooks => _allBooks;
 
-  get savedBooks {
-    // print(_allBooks[0].isSaved);
+  List<Book> get savedBooks {
     for (Book element in _allBooks) {
       if (element.isSaved == true) {
         _savedBooks.add(element);
@@ -62,12 +61,13 @@ class Books {
     return _savedBooks;
   }
 
-  get cartBooks {
+  List<Book> get cartBooks {
     for (Book element in _allBooks) {
       if (element.isCart == true) {
         _cartBooks.addAll([element]);
       }
     }
+    
     return _cartBooks;
   }
 }

@@ -11,7 +11,7 @@ class BookInfoDisplay extends StatelessWidget {
   final int index;
   final List<Book> bookShelf;
 
-  BookInfoDisplay({
+  const BookInfoDisplay({
     Key? key,
     required this.index,
     required this.bookShelf,
@@ -38,7 +38,7 @@ class BookInfoDisplay extends StatelessWidget {
             fit: BoxFit.fill,
             imageUrl: bookShelf[index].imageLink,
             placeholder: (context, url) {
-              return Center(
+              return const Center(
                 child: SizedBox(
                   width: 30,
                   height: 30,
@@ -63,18 +63,18 @@ class BookInfoDisplay extends StatelessWidget {
                       title: bookShelf[index].title,
                       size: 18,
                     ),
-                    SizedBox(height: 3),
+                    const SizedBox(height: 3),
                     Text(
                       bookShelf[index].author,
-                      style: TextStyle(
-                          color: Color.fromARGB(127, 6, 7, 13), fontSize: 18),
+                      style: const TextStyle(
+                          color: const Color.fromARGB(127, 6, 7, 13), fontSize: 18),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     CustomTitle(
                       title: "\$${bookShelf[index].price}",
                       size: 20,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     StarRating(
                       rate: Rx<int>(bookShelf[index].rate.toInt()),
                       functional: false,
@@ -95,12 +95,14 @@ class BookInfoDisplay extends StatelessWidget {
                           setState(
                             () => bookShelf[index].isSaved =
                                 !bookShelf[index].isSaved,
+                                
                           );
+                          print(Books().savedBooks);
                         },
                         child: bookShelf[index].isSaved
-                            ? Icon(Icons.bookmark_added_sharp,
+                            ? const Icon(Icons.bookmark_added_sharp,
                                 color: Colors.green)
-                            : Icon(Icons.bookmark_add_sharp));
+                            : const Icon(Icons.bookmark_add_sharp));
                   },
                 ),
               ],
